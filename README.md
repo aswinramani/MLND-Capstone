@@ -9,8 +9,9 @@
 3. Quandl (Stock data)
 4. TA-Lib (For computing Technical Indicators)
 5. Sklearn  (MinMaxScaler, Algorithms, R-squared score, GridSearchCV, TimeSeriesSplit) 
-6. Matplotlib (for plotting graphs and histograms)
-7. Arrow (uses training period to figure out the start and end dates)
+6. Arrow (uses training period to figure out the start and end dates)
+
+Please refer to the official websites of the above mentioned libraries to install them.
 
 ### Default Settings
 
@@ -34,11 +35,11 @@ Note:
 
 Months could be used as training time period as well. By default, if you mention 14 it would be considered as 14 months. 
 
-The word "train" could be used inplace of t to indicate that you want to train.
+The word "train" could be used inplace of t to train.
 
-The word "query" could be used inplace of q to indicate that you want to query.
+The word "query" could be used inplace of q to query.
 
-The word "remove" could be used inplace of r to indicate that you want to remove.
+The word "remove" could be used inplace of r to remove.
 
 
 
