@@ -1,12 +1,9 @@
 import sys
-import code
-import pandas as pd 
 import validations as validate
 import util as ut
 import pre_process
 import model
 import pred as predictions
-# import visuals as vs
 
 def run():
     input_data = validate.input_data(sys.argv)
@@ -32,12 +29,10 @@ def run():
         # /***** 2. Querying *****/
 
         elif input_data["query"]:
+            
             if input_data["default"]:
                 print input_data["message"] 
-            # else:
             predictions.show(input_data["default"], input_data['tickers'], input_data['period']['value'])
-            # else:
-            #     pass
 
         # /***** 3. Removing *****/
 
@@ -52,4 +47,5 @@ if __name__ == '__main__':
     run()
 
 # Debugger Code
+# import code
 # code.interact(local=dict(globals(), **locals()))

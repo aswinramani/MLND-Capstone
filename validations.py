@@ -13,7 +13,7 @@ def duration(last_element, train=True):
         try:
             period['value'] = int(last_element)
             period['months'] = True
-            if period['value'] > 84 or period['value'] < 60:
+            if period['value'] > 180 or period['value'] < 60:
                 period['valid'] = False
         except ValueError:
             split_input_m = last_element.split('m')
@@ -25,7 +25,7 @@ def duration(last_element, train=True):
                     period['valid'] = False
                 if period['valid']:
                     period['months'] = True
-                    if period['value'] > 84 or period['value'] < 60:
+                    if period['value'] > 180 or period['value'] < 60:
                         period['valid'] = False
             elif len(split_input_y) > 1:
                 try:
@@ -34,7 +34,7 @@ def duration(last_element, train=True):
                     period['valid'] = False
                 if period['valid']:
                     period['years'] = True
-                    if period['value'] > 7 or period['value'] < 5:
+                    if period['value'] > 15 or period['value'] < 5:
                         period['valid'] = False
             else:
                 period['valid'] = False
@@ -81,6 +81,7 @@ def group(symbols, ticker_keys):
     ticker["list"] = valid_list    
     ticker["error_message"] = error_message
     return ticker
+
 def qi_tickers(input_list):
     valid = True
     error_message = ""
@@ -96,13 +97,7 @@ def qi_tickers(input_list):
             for fyle in os.listdir('./predictions'):
                 if fyle.endswith(".csv"):
                     if fyle.startswith(input_item):
-                        # if len(invalid_list) > 0 and not input_item in invalid_list:
                         valid_list.append(input_item)
-        #                 if not input_item in invalid_list:
-        #                     invalid_list.append(input_item)
-                        # error_message += "predictions not available for {}\n".format(input_item) 
-                        # valid = False
-                # split_list= fyle.split(".")
         valid = len(new_ls) == len(valid_list)
         if not valid:
             set1 = set(new_ls)
@@ -124,8 +119,8 @@ def qi_tickers(input_list):
         "error_message": error_message
     }
     return tickers
+
 def query_interface(input_list):
-    # file_name = "{}.csv".format(ticker)
     value = 0
     valid = True
     use_default = False
@@ -165,6 +160,7 @@ def query_interface(input_list):
         "error_message": error_message
     }
     return query
+
 def input_data(input_list):
     train = True
     query = False
@@ -187,10 +183,10 @@ def input_data(input_list):
             else:
             # if not period['valid']:
                 if period["months"]:
-                    error_message += "Min value for months --> 60 and Max --> 84"
+                    error_message += "Min value for months --> 60 and Max --> 180"
                     success = False
                 elif period["years"]:
-                    error_message += "Min value for years --> 5 and Max --> 7"
+                    error_message += "Min value for years --> 5 and Max --> 15"
                     success = False
                 else:    
                     error_message += "please mention training period"
@@ -212,7 +208,7 @@ def input_data(input_list):
     elif len(input_list) > 7:
         line_1 =  "Exceeded Maximum permissible arguments\n"
         line_2 =  "Enter a maximum of 7 inputs consisting of\n"
-        line_3 = "1.input for mentioning training or query\n 2. Ticker symbols(max 5 allowed),\n 3. Training period"#, and \n3. Prediction Period"
+        line_3 = "1.input for mentioning training or query \n 2. Ticker symbols(max 5 allowed),\n 3. Training period"#, and \n3. Prediction Period"
         error_message += line_1 + line_2 + line_3
         success = False
     elif len(input_list) > 0 and ( input_list[0] == 't' or input_list[0] == 'train' ):
@@ -221,7 +217,6 @@ def input_data(input_list):
     elif len(input_list) > 0 and ( input_list[0] == 'q' or input_list[0] == 'query' ):
         train = False
         query = True
-        # error_message +=  "please mention ticker symbols"   
         qi = query_interface(input_list)
         if not qi["valid"]:
             error_message += qi["error_message"] 
@@ -236,10 +231,9 @@ def input_data(input_list):
             shutil.rmtree("./predictions")
             message = "Predicted files have been removed successfully"
         except OSError:
-            error_message += "oops! predictions directory does'nt exist"
+            error_message += "oops! no predictions have been made yet..."
             success = False
     else:
-        # print "input list", input_list
         error_message +=  "please mention if you want to train or query. "
         success = False   
     if success:

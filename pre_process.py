@@ -1,10 +1,8 @@
-import code
 import pandas as pd
 import numpy as np
 import util as ut 
 import re
-# import visuals as vs
-from sklearn.preprocessing import MinMaxScaler#, StandardScaler, RobustScaler
+from sklearn.preprocessing import MinMaxScaler
 
 def process_dates(grouped_data, ticker):
     start_date = pd.to_datetime(str(grouped_data[ticker].index.values[0])).strftime("%Y/%m/%d")
@@ -33,28 +31,15 @@ def rename_col(col_list, ticker):
     return columns    
 
 def process_indicators(df):
-    # Compute technical indicators
-    sma, trima, wma, dema, tema, t3 = ut.overlap_studies(df)
-    mom, ppo, rsi = ut.momentum_indicators(df)
-    # mom, ppo, rsi, cci, ult, mfi = ut.momentum_indicators(df)
-    # obv, chaikin_osc = ut.volume_indicators(df)
-    # add overlap study functions
+    # Compute leading indicators
+    mom, rsi = ut.leading_indicators(df)
+    # Compute lagging indicators
+    sma, trima, wma = ut.lagging_indicators(df)
+    df["adj_mom"] = mom
+    df["adj_rsi"] = rsi
     df["adj_sma"] = sma
     df["adj_trima"] = trima
     df["adj_wma"] = wma
-    # df["adj_dema"] = dema
-    # df["adj_tema"] = tema
-    # df["adj_t3"] = t3
-    # add momentum indicators
-    df["adj_mom"] = mom
-    df["adj_ppo"] = ppo
-    # df["adj_rsi"] = rsi
-    # df["adj_cci"] = cci
-    # df["adj_ult"] = ult
-    # df["adj_mfi"] = mfi
-    # add volume indicators
-    # df["adj_obv"] = obv
-    # df["adj_chaikin_osc"] = chaikin_osc
     # add target
     df["adj_pred"] = df["adj_close"].shift(-7)
     return fill_missing_values(df)
@@ -65,11 +50,6 @@ def log_transform(x):
         x = abs(x)
         mod = -1
     return mod * np.log(x + 1)
-
-def ci(df):
-    mean = df.mean()
-    std = df.std()
-    return mean + ( 2 * std)
 
 def verify_skewness(df):
     for feature in df.columns.values:
@@ -85,11 +65,9 @@ def normalize(raw_features, stock_ticker):
     print "verifying skewness for {}".format(stock_ticker)
     # Check for skewness and apply transformation if necessary
     features = verify_skewness(raw_features)
-    # scaler = StandardScaler()
     scaler = MinMaxScaler()
-    # scaler = RobustScaler()
+    # normalize dataset
     data = scaler.fit_transform(features)
-    # data = scaler.fit_transform(raw_features)
     normalized_df = pd.DataFrame(data=data, index=raw_features.index.values, columns=raw_features.columns.values)
     return normalized_df
 
@@ -100,7 +78,7 @@ def dataset(grouped_data, valid_tickers):
     for stock_ticker in valid_tickers:
         temp_df = grouped_data[stock_ticker].copy()
         temp_df.drop("ticker", axis=1, inplace=True)
-        # Compute and add technical indicators, target to the dataset
+        # Compute and add technical indicators, target
         process_indicators(temp_df)
         # Drop target in order to normalize the features
         raw_features = temp_df.drop("adj_pred", axis=1)
@@ -108,10 +86,10 @@ def dataset(grouped_data, valid_tickers):
         normalized_df = normalize(raw_features, stock_ticker)
         # add target to normalized data frame
         normalized_df["adj_pred"] = temp_df["adj_pred"] 
-        # normalized_features = pre_process.normalize(features_raw)
         normalized_df = normalized_df.rename(columns=rename_col(normalized_df.columns.values, stock_ticker))
         df = df.join(normalized_df)   
     return fill_missing_values(df)
 
 # Debugger code
+# import code
 # code.interact(local=dict(globals(), **locals()))

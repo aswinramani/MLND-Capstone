@@ -1,5 +1,6 @@
 import pandas as pd
 import util as ut
+
 def show(use_default, ticker_list, period):
     tickers = ticker_list
     if use_default:
@@ -9,6 +10,7 @@ def show(use_default, ticker_list, period):
         df = pd.read_csv("predictions/{}.csv".format(ticker), index_col='date', nrows=period)           
         print df 
         print "\n"
+
 # Debugger  code
 # import code
 # code.interact(local=dict(globals(), **locals()))
