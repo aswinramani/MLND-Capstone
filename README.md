@@ -25,6 +25,7 @@ python app.py q
 ### Train models with stock tickers of your choice
 
 python app.py t TICKER1 TICKER2 TICKER3 10y
+
 python app.py q TICKER1 TICKER2 5
 
 ### Remove predictions
