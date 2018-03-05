@@ -17,23 +17,27 @@
 To keep things simple, default stock tickers and time period have been implemented. Please follow the instructions given below.
 
 #### Train models using default stock tickers and time period 
-1. python app.py t 
+python app.py t 
 #### Default query will return predictions for all tickers 
-2. python app.py q
+python app.py q
 
 ### Train models with stock tickers of your choice
 
-1. python app.py t TICKER1 TICKER2 TICKER3 10y
-2. python app.py q TICKER1 TICKER2 5
+python app.py t TICKER1 TICKER2 TICKER3 10y
+python app.py q TICKER1 TICKER2 5
 
 ### Remove predictions
 
-1. python app.py r
+python app.py r
 
 Note:
+
 Months could be used as training time period as well. By default, if you mention 14 it would be considered as 14 months. 
+
 The word "train" could be used inplace of t to indicate that you want to train.
+
 The word "query" could be used inplace of q to indicate that you want to query.
+
 The word "remove" could be used inplace of r to indicate that you want to remove.
 
 
