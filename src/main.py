@@ -1,9 +1,9 @@
 import sys
-import validations as validate
-import util as ut
-import pre_process
-import model
-import pred as predictions
+import data.validations as validate
+import data.util as ut
+import preprocessing.pre_process as pre_process
+import training.model as model
+import training.pred as predictions
 
 def run():
     input_data = validate.input_data(sys.argv)

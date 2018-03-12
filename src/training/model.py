@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 from time import time
-import util as ut
+import data.util as ut
 from sklearn.model_selection import TimeSeriesSplit, GridSearchCV
 from sklearn.linear_model import LinearRegression
 from sklearn.kernel_ridge import KernelRidge
@@ -128,7 +128,7 @@ def predict(pred_alg, estimator, pred_dates, df_train, df_pred, target_col_name)
     pred_alg_predictions = estimator.predict(np.array(X_pred))                  
     df[col_2] = pred_alg_predictions
     file_name = "{}.csv".format(ticker)
-    directory = './predictions'
+    directory = '../predictions'
     if not os.path.exists(directory):
         os.mkdir(directory)
     file_path = os.path.join(directory, file_name)
@@ -148,10 +148,10 @@ def train_predict(df, ticker_list, default_tickers):
         pred_dates = ut.get_pred_dates(df_pred.index.values[len(df_pred.index.values) - 1])
         predict(pred_alg, estimator, pred_dates, df_train, df_pred, target_col_name)
     if default_tickers:
-        def_file = open("./predictions/default.py", "w")
+        def_file = open("../predictions/default.py", "w")
         def_file.close() 
     else:
-        directory = './predictions'
+        directory = '../predictions'
         if os.path.exists(directory):
             file_name = "default.py"
             try:

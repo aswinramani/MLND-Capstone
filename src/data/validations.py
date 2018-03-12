@@ -94,7 +94,7 @@ def qi_tickers(input_list):
         new_ls.remove(last_element)
         valid_list = []
         for input_item in new_ls:
-            for fyle in os.listdir('./predictions'):
+            for fyle in os.listdir('../predictions'):
                 if fyle.endswith(".csv"):
                     if fyle.startswith(input_item):
                         valid_list.append(input_item)
@@ -125,7 +125,7 @@ def query_interface(input_list):
     valid = True
     use_default = False
     error_message = ""
-    directory = './predictions'
+    directory = '../predictions'
     if os.path.exists(directory):
         if len(input_list) > 1:
             last_index = len(input_list) - 1
@@ -143,7 +143,7 @@ def query_interface(input_list):
                 error_message = tickers["error_message"]
         elif len(input_list) > 0:
             import sys
-            sys.path.insert(0,'./predictions')
+            sys.path.insert(0,'../predictions')
             try:
                 import default
                 use_default = True
@@ -228,7 +228,7 @@ def input_data(input_list):
         remove = True
         train = False
         try: 
-            shutil.rmtree("./predictions")
+            shutil.rmtree("../predictions")
             message = "Predicted files have been removed successfully"
         except OSError:
             error_message += "oops! no predictions have been made yet..."

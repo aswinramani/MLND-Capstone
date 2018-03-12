@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import util as ut 
+import data.util as ut 
 import re
 from sklearn.preprocessing import MinMaxScaler
 

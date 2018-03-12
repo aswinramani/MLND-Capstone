@@ -1,5 +1,5 @@
 import pandas as pd
-import util as ut
+import data.util as ut
 
 def show(use_default, ticker_list, period):
     tickers = ticker_list
@@ -7,7 +7,7 @@ def show(use_default, ticker_list, period):
         tickers = ut.get_tickers(True, [])
         period =  7
     for ticker in tickers:
-        df = pd.read_csv("predictions/{}.csv".format(ticker), index_col='date', nrows=period)           
+        df = pd.read_csv("../predictions/{}.csv".format(ticker), index_col='date', nrows=period)           
         print df 
         print "\n"
 

@@ -13,24 +13,27 @@
 
 Please refer to the official websites of the above mentioned libraries to install them.
 
+### Change the directory to src by typing this command
+cd src
+
 ### Default Settings
 
 To keep things simple, default stock tickers and time period have been implemented. Please follow the instructions given below.
 
 #### Train models using default stock tickers and time period 
-python app.py t 
+python main.py t 
 #### Default query will return predictions for all tickers 
-python app.py q
+python main.py q
 
 ### Train models with stock tickers of your choice
 
-python app.py t TICKER1 TICKER2 TICKER3 10y
+python main.py t TICKER1 TICKER2 TICKER3 10y
 
-python app.py q TICKER1 TICKER2 5
+python main.py q TICKER1 TICKER2 5
 
 ### Remove predictions
 
-python app.py r
+python main.py r
 
 Note:
 
