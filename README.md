@@ -1,15 +1,17 @@
-# Machine Learning Engineer Nanodegree
+# Stock Price Predictor
 
-## Build a Stock Price Predictor
+## Stock Price Prediction Using Technical Analysis
 
-### List of Important Libraries that were used for this project
+### Software and Libraries
+This project uses the following software and Python libraries:
 
-1. Pandas (DataFrame data structure and its functions)
-2. Numpy (Arrays, DateTime objects, Log Transformation)
-3. Quandl (Stock data)
-4. TA-Lib (For computing Technical Indicators)
-5. Sklearn  (MinMaxScaler, Algorithms, R-squared score, GridSearchCV, TimeSeriesSplit) 
-6. Arrow (uses training period to figure out the start and end dates)
+- [Python 2.7](https://www.python.org/download/releases/2.7/)
+- [NumPy](http://www.numpy.org/)
+- [Pandas](http://pandas.pydata.org/)
+- [Scikit-Learn](http://scikit-learn.org/stable/)
+- [Quandl](https://docs.quandl.com/)
+- [TA-Lib](https://mrjbq7.github.io/ta-lib/)
+- [Arrow](http://arrow.readthedocs.io/)
 
 Please refer to the official websites of the above mentioned libraries to install them.
 
