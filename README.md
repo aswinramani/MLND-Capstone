@@ -2,6 +2,8 @@
 
 ## Stock Price Prediction Using Technical Analysis
 
+Please check the [final report](https://github.com/aswinramani/MLND-Capstone/blob/master/documents/final_report.ipynb) for a detailed understanding of how this project was implemented. 
+
 ### Software and Libraries
 This project uses the following software and Python libraries:
 
